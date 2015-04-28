@@ -1,10 +1,10 @@
 <ion-view view-title="Localização">
-  <ion-content>
+  <ion-content >
     <h1>Localização</h1>
 	
 	 <ion-list>
-      <ion-item controller-repeat="item in items">
-        {{ item }}
+      <ion-item ng-repeat="item in items">
+        {{ item.item }}
       </ion-item>
     </ion-list>
 	
