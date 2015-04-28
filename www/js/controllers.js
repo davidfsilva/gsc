@@ -34,11 +34,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ListCtrl', function($scope, $http) {
-	
-$scope.heading = [];
+
         $http({
             method: 'GET',
-            url: 'http://app-salvadorcaetano.rhcloud.com/teste.php?jsoncallback'
+            url: 'http://app-salvadorcaetano.rhcloud.com/localizacao.php?jsoncallback'
         }).success(function(data) {
             $scope.items = data; // response data 
         }).error(function(data) {
