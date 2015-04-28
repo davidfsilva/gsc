@@ -33,20 +33,17 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ListCtrl', function($scope) {
+.controller('ListCtrl', function($scope, $http) {
 	
-$http.get('http://app-salvadorcaetano.rhcloud.com/teste.php?jsoncallback').
-  success(function(data, status, headers, config) {
-	  $scope.items = [{item: data}];
-    // this callback will be called asynchronously
-    // when the response is available
-  }).
-  error(function(data, status, headers, config) {
-	console.log("ERRO");
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-  });
-  
+$scope.heading = [];
+        $http({
+            method: 'GET',
+            url: 'http://app-salvadorcaetano.rhcloud.com/teste.php?jsoncallback'
+        }).success(function(data) {
+            $scope.items = data; // response data 
+        }).error(function(data) {
+            console.log("failed");
+        });	
 })
 
  .controller('PerfilCtrl', function ($scope) {
