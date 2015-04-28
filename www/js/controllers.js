@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -23,13 +23,21 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+	var user = $scope.loginData.username;
+	var pass = $scope.loginData.password;
+	
+	var link = 'http://app-salvadorcaetano.rhcloud.com/login.php?jsoncallback';
+	
+	$.getJSON( link, {user:user, pass:pass})
+	.done(function(respostaServidor) {		
+		if(respostaServidor.validacao == "OK"){
+			alert(respostaServidor.validacao);
+			
+		}else{
+		  alert(respostaServidor.validacao);
+		}
+	})
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
   };
 })
 
@@ -38,7 +46,7 @@ angular.module('starter.controllers', [])
 $scope.heading = [];
         $http({
             method: 'GET',
-            url: 'http://app-salvadorcaetano.rhcloud.com/teste.php?jsoncallback'
+            url: 'http://app-salvadorcaetano.rhcloud.com/localizacao.php?jsoncallback'
         }).success(function(data) {
             $scope.items = data; // response data 
         }).error(function(data) {
